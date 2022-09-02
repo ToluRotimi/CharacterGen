@@ -1,5 +1,5 @@
-from application import app,db
-from flask import Flask, render_template, url_for
+from application import app
+from flask import Flask, request,render_template, url_for
 import requests
 
 # index route
@@ -7,4 +7,5 @@ import requests
 def index():
     Letter = requests.get('http://Letter-api:5000/letter')
     Colour = requests.get('http://Colour-api:5000/colour')
-    Character = requests.post('http://Character-api:5000/character', json=Letter.json(), json= Colour.json())
+    Character = requests.post('http://Character-api:5000/character', json = {"Letters": Letter.text, "Colours":Colour.text})
+
