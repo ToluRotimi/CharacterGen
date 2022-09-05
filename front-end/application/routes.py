@@ -8,4 +8,4 @@ def index():
     Letter = requests.get('http://Letter-api:5000/letter')
     Colour = requests.get('http://Colour-api:5000/colour')
     Character = requests.post('http://Character-api:5000/character', json = {"Letters": Letter.text, "Colours":Colour.text})
-
+    # Character.data.decode

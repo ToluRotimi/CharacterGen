@@ -1,0 +1,51 @@
+# docker compose file to contain the resources
+#build multiple images and container with one command line 
+# automatically puts containers into a newtwork
+
+version: "3.8"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+    networks:
+      - generator-net
+    depends_on:
+      - front-end
+  front-end:
+    container_name: front-end
+    image: trot22/front-end:latest
+    build: ./front-end
+    networks:
+      - generator-net
+  Letter-api:
+    image: trot22/letter-api:latest
+    build: ./back-end/letter-api
+    deploy:
+      replicas: 3
+    networks:
+      - generator-net
+  Colour-api:
+    image: trot22/colour-api:latest
+    build: ./back-end/colour-api
+    deploy:
+      replicas: 3
+    networks:
+      - generator-net
+  Character-api:
+    image: trot22/character-api:latest
+    build: ./back-end/character-api
+    deploy:
+      replicas: 3
+    networks:
+      - generator-net
+networks:
+  generator-net:
+    
