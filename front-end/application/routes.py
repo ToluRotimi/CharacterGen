@@ -5,7 +5,7 @@ import requests
 # index route
 @app.route('/', methods = ['GET'])
 def index():
-    Letter = requests.get('http://Letter-api:5000/letter')
-    Colour = requests.get('http://Colour-api:5000/colour')
-    Character = requests.post('http://Character-api:5000/character', json = {"Letters": Letter.text, "Colours":Colour.text})
+    personality = requests.get('http://personality-api:5001/personality')
+    colour = requests.get('http:/colour-api:5002/colour')
+    character = requests.post('http://character-api:5003/character', json = {"Letters": Letter.text, "Colours":Colour.text})
     # Character.data.decode

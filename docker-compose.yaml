@@ -21,26 +21,30 @@ services:
       - front-end
   front-end:
     container_name: front-end
-    image: trot22/front-end:latest
+    image: trot22/frontend-swarm:latest
     build: ./front-end
+    depends_on:
+      - 'letter-api'
+      - 'colour-api'
+      - 'character-api'
     networks:
       - generator-net
-  Letter-api:
-    image: trot22/letter-api:latest
+  personality-api:
+    image: trot22/letter-swarm:latest
     build: ./back-end/letter-api
     deploy:
       replicas: 3
     networks:
       - generator-net
-  Colour-api:
-    image: trot22/colour-api:latest
+  colour-api:
+    image: trot22/colour-swarm:latest
     build: ./back-end/colour-api
     deploy:
       replicas: 3
     networks:
       - generator-net
-  Character-api:
-    image: trot22/character-api:latest
+  character-api:
+    image: trot22/character-swarm:latest
     build: ./back-end/character-api
     deploy:
       replicas: 3
