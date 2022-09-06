@@ -15,8 +15,6 @@ services:
       - type: bind
         source: ./nginx.conf
         target: /etc/nginx/nginx.conf
-    networks:
-      - generator-net
     depends_on:
       - front-end
   front-end:
@@ -24,32 +22,22 @@ services:
     image: trot22/frontend-swarm:latest
     build: ./front-end
     depends_on:
-      - 'letter-api'
+      - 'personality-api'
       - 'colour-api'
       - 'character-api'
-    networks:
-      - generator-net
   personality-api:
-    image: trot22/letter-swarm:latest
-    build: ./back-end/letter-api
+    image: trot22/personality-swarm:latest
+    build: ./back-end/personality-api
     deploy:
-      replicas: 3
-    networks:
-      - generator-net
+      replicas: 2
   colour-api:
     image: trot22/colour-swarm:latest
     build: ./back-end/colour-api
     deploy:
-      replicas: 3
-    networks:
-      - generator-net
+      replicas: 2
   character-api:
     image: trot22/character-swarm:latest
     build: ./back-end/character-api
     deploy:
-      replicas: 3
-    networks:
-      - generator-net
-networks:
-  generator-net:
+      replicas: 2
     
