@@ -1,22 +1,11 @@
-hosts: all
-become: yes
-tasks:
-  -name: apt
-    apt:
-    update_cache: yes
-    upgrade: 'yes'
-
-- hosts: all
-  become: true
-  roles: 
-  - dockerinstall
-
-- hosts: managers
+- hosts: manager
+  connection: local
   become: true
   roles:
   - swarmmanager
 
 - hosts: workers
+  connection: local
   become: true
   roles:
   - swarmworker
