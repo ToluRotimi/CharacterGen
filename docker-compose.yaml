@@ -21,8 +21,6 @@ services:
     container_name: front-end
     image: trot22/frontend-swarm:latest
     build: ./front-end
-    deploy:
-      replicas: 3
     depends_on:
       - 'personality-api'
       - 'colour-api'
