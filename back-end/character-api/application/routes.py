@@ -1,30 +1,31 @@
 from application import app
-from flask import redirect , url_for, render_template
+from flask import redirect , url_for, render_template,Response,jsonify,request
 
-@app.route('/character', methods =["GET","POST"])
-def character(colour, personality):
-    if colour == "Red" or colour == "Green" and characteristics == characteristics[0] or  characteristics == characteristics[6]:
+@app.route('/character', methods =["POST"])
+def character():
+    data_sent = request.get_json()
+    if data_sent["colour"] == "Red" or data_sent["colour"] == "Green" and data_sent["personality"] == "Anticipative""Brave""Curious" or  data_sent["personality"] == "Xenial""Youthful""Zazzy":
         message = "Character: Bibbles"
         # insert image
-    elif colour == "Red" or colour == "Green" and characteristics == characteristics[1] or  characteristics == characteristics[5]:
+    elif data_sent["colour"] == "Red" or data_sent["colour"] == "Green" and data_sent["personality"] == "Decisive""Emotive""Funny""Grounded" or data_sent["personality"]  == "Upright""Versatile""Worldly":
         message = "Character: Princess Annelisse "
         # insert image
-    elif colour == "Red" or colour == "Green" and characteristics == characteristics[2] or  characteristics == characteristics[4]:
+    elif data_sent["colour"]== "Red" or data_sent["colour"] == "Green" and data_sent["personality"] == "Home-Bound""Intelligent""Jolly""Knightly" or data_sent["personality"]  == "Quiet""Restless""Sad""Tainted":
         message = "Character: Princess Genevieve "
         # insert image
-    elif colour == "Red" or colour == "Green" and characteristics == characteristics[3]:
+    elif data_sent["colour"] == "Red" or data_sent["colour"] == "Green" and data_sent["personality"] == "Loud""Melachonly""Naughty""Optimistic""Patient":
         message = "Character: Rapunzel "
         # insert image
-    elif colour == "Blue" or colour == "Orange" and characteristics == characteristics[0] or  characteristics == characteristics[6]:
+    elif data_sent["colour"] == "Blue" or data_sent["colour"] == "Orange" and data_sent["personality"] == "Anticipative""Brave""Curious" or  data_sent["personality"] == "Xenial""Youthful""Zazzy":
         message = "Character: Rapunzel "
         # insert image
-    elif colour == "Blue" or colour == "Orange" and characteristics == characteristics[1] or  characteristics == characteristics[5]:
+    elif data_sent["colour"] == "Blue" or data_sent["colour"] == "Orange" and data_sent["personality"] == "Decisive""Emotive""Funny""Grounded" or data_sent["personality"]  == "Upright""Versatile""Worldly" :
         message = "Character: Princess Genevieve "
         # insert image
-    elif colour == "Blue" or colour == "Orange" and characteristics == characteristics[2] or  characteristics == characteristics[4]:
+    elif data_sent["colour"] == "Blue" or data_sent["colour"] == "Orange" and data_sent["personality"] == "Home-Bound""Intelligent""Jolly""Knightly" or data_sent["personality"]  == "Quiet""Restless""Sad""Tainted":
         message = "Character: Princess Annaliese "
         # insert image
-    elif colour == "Blue" or colour == "Orange" and characteristics == characteristics[3]:
+    elif data_sent["colour"] == "Blue" or data_sent["colour"] == "Orange" and data_sent["personality"] == "Loud""Melachonly""Naughty""Optimistic""Patient":
         message = "Character: Bibbles "
         # insert image
     else:
