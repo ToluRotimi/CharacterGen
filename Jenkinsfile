@@ -6,7 +6,12 @@ pipeline {
                 sh "bash test.sh"
             }
         }
+
         stage('Build and push images') {
+            environment {
+                DOCKER_UNAME = credentials('dockeruser')
+                DOCKER_UNAME = credentials('dockerpass')
+            }
             steps {
                 sh "docker-compose build" 
                 sh "docker login -u $DOCKER_UNAME -p $DOCKER_PWORD"
