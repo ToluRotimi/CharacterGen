@@ -1,0 +1,43 @@
+# docker compose file to contain the resources
+#build multiple images and container with one command line 
+# automatically puts containers into a newtwork
+
+version: "3.8"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+    depends_on:
+      - front-end
+  front-end:
+    container_name: front-end
+    image: trot22/frontend-swarm:latest
+    build: ./front-end
+    depends_on:
+      - 'personality-api'
+      - 'colour-api'
+      - 'character-api'
+  personality-api:
+    image: trot22/personality-swarm:latest
+    build: ./back-end/personality-api
+    deploy:
+      replicas: 3
+  colour-api:
+    image: trot22/colour-swarm:latest
+    build: ./back-end/colour-api
+    deploy:
+      replicas: 3
+  character-api:
+    image: trot22/character-swarm:latest
+    build: ./back-end/character-api
+    deploy:
+      replicas: 3
+    

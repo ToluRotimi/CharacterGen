@@ -1,10 +1,11 @@
-from application import app,db
-from flask import Flask, render_template, url_for
+from application import app
+from flask import Flask, request,render_template, url_for
 import requests
 
 # index route
-@app.route('/', methods = ['GET'])
+@app.route('/index', methods = ['GET'])
 def index():
-    Letter = requests.get('http://Letter-api:5000/letter')
-    Colour = requests.get('http://Colour-api:5000/colour')
-    Character = requests.post('http://Character-api:5000/character', json=Letter.json(), json= Colour.json())
+    personality = requests.get('http://personality-api:5001/personality')
+    colour = requests.get('http://colour-api:5002/colour')
+    character = requests.post('http://character-api:5003/character', json = {"personality": personality.text, "colour":colour.text})
+    return render_template('characters.html',personality=personality.text,colour=colour.text,character=character.text)
