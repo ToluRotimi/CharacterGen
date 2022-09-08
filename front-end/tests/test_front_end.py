@@ -8,9 +8,7 @@ class TestBase(TestCase):
     def create_app(self):
         return app
 
-
 class TestHomeView(TestBase):
     def test_get_home(self):
         response = self.client.get(url_for('index'))
-        self.assert200(response)
-        self.assertIn(b'Home Page',response.data)
+        self.assertEqual(response.status_code, 200)
