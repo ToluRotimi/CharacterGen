@@ -8,8 +8,8 @@ pipeline {
         }
         stage('Build and push images') {
             environment {
-                DOCKER_UNAME = credentials('docker_uname')
-                DOCKER_PWORD = credentials('docker_pword')
+                DOCKER_UNAME = credentials('trot22')
+                DOCKER_PWORD = credentials('Redbottlecap1!')
             }
             steps {
                 sh "docker-compose build --parallel"
