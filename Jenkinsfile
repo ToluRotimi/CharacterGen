@@ -23,5 +23,4 @@ pipeline {
                 sh "scp -i ~/.ssh/ansible_id_rsa nginx.conf swarm-master:/home/jenkins/nginx.conf"
                 sh "ansible-playbook -i ansible/inventory.yaml ansible/playbook.yaml"
             }
-        }
-    } 
+        } 
