@@ -10,7 +10,7 @@ pipeline {
         stage('Build and push images') {
             environment {
                 DOCKER_UNAME = credentials('dockeruser')
-                DOCKER_UNAME = credentials('dockerpass')
+                DOCKER_PWORD = credentials('dockerpass')
             }
             steps {
                 sh "docker-compose build" 
