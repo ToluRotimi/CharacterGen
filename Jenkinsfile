@@ -8,16 +8,13 @@ pipeline {
         }
 
         stage('Build and push images') {
-            environment {
-                DOCKER_UNAME = credentials('dockeruser')
-                DOCKER_PWORD = credentials('dockerpass')
+          steps {
+                sh "sudo docker-compose build --parallel"
+                sh "sudo docker login -u trot22 -p Redbottlecap1!"
+                sh "sudo docker-compose push"
             }
-            steps {
-                sh "docker-compose build" 
-                sh "docker login -u $DOCKER_UNAME -p $DOCKER_PWORD"
-                sh "docker-compose push"
-            }
-        }
+        } 
+
         stage('Deploy') {
             steps {
                 sh "scp -i ~/.ssh/ansible_id_rsa docker-compose.yaml swarm-master:/home/jenkins/docker-compose.yaml"
